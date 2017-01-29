@@ -129,6 +129,7 @@ function GameMode:OnGameInProgress()
   -- initialize modules
   InitModule(PointsManager)
   InitModule(CreepCamps)
+  InitModule(ZoneControl)
 end
 
 function InitModule(myModule)
