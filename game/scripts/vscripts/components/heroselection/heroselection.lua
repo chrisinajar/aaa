@@ -67,7 +67,6 @@ function HeroSelection:Init ()
       end
     end
     if value == 1 then
-      DebugPrint('Hero thingy fuck whatever ' .. allheroes[key].AttributePrimary)
       if not heroAbilities[allheroes[key].AttributePrimary] then
         heroAbilities[allheroes[key].AttributePrimary] = {}
       end
@@ -713,6 +712,26 @@ function HeroSelection:UnsafeRandomHero ()
     end
     curstate = curstate + 1
   end
+end
+
+function HeroSelection:GetBans ()
+  local bans = {}
+  if HeroSelection.isCM then
+    for _,entry in ipairs(cmpickorder.order) do
+      if entry.type == "Ban" and entry.hero ~= "empty" then
+        table.insert(bans, entry.hero)
+      end
+    end
+  end
+  if HeroSelection.isRanked then
+    for _,entry in pairs(rankedpickorder.banChoices) do
+      if entry ~= "empty" then
+        table.insert(bans, entry)
+      end
+    end
+  end
+
+  return bans
 end
 
 -- start strategy timer
